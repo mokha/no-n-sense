@@ -83,9 +83,17 @@ import timeit
 
 #combine all data
 data = []
-data.extend(asDocumentClass(classification_data['musics']['reviews'], 'music'))
-data.extend(asDocumentClass(classification_data['movies']['reviews'], 'movie'))
-data.extend(asDocumentClass(classification_data['games']['reviews'], 'game'))
+
+#class data
+# data.extend(asDocumentClass(classification_data['musics']['reviews'], 'music'))
+# data.extend(asDocumentClass(classification_data['movies']['reviews'], 'movie'))
+# data.extend(asDocumentClass(classification_data['games']['reviews'], 'game'))
+
+#review data
+# data.extend(asDocumentReview(classification_data['musics']['reviews']))
+# data.extend(asDocumentReview(classification_data['movies']['reviews']))
+# data.extend(asDocumentReview(classification_data['games']['reviews']))
+
 shuffle(data)
 
 
@@ -99,24 +107,27 @@ print 'Test Size: ' + str(test_size)
 
 print 'Training Started!'
 classification_methods = {
-  'NB' :  NB(train=[], baseline=MAJORITY, method=MULTINOMIAL),
-  'KNN2' : KNN(train=[], baseline=MAJORITY, k=2, distance=COSINE),
-  'KNN3' : KNN(train=[], baseline=MAJORITY, k=3, distance=COSINE),
-  'KNN4' : KNN(train=[], baseline=MAJORITY, k=4, distance=COSINE),
-  'KNN5' : KNN(train=[], baseline=MAJORITY, k=5, distance=COSINE),
-  'KNN6' : KNN(train=[], baseline=MAJORITY, k=6, distance=COSINE),
-  'KNN7' : KNN(train=[], baseline=MAJORITY, k=7, distance=COSINE),
-  'KNN8' : KNN(train=[], baseline=MAJORITY, k=8, distance=COSINE),
-  'KNN9' : KNN(train=[], baseline=MAJORITY, k=9, distance=COSINE),
-  'KNN10' : KNN(train=[], baseline=MAJORITY, k=10, distance=COSINE),
-  'SLP1' : SLP(train=[], baseline=MAJORITY, iterations=1),
-  'SLP2' : SLP(train=[], baseline=MAJORITY, iterations=2),
-  'SLP3' : SLP(train=[], baseline=MAJORITY, iterations=3),
-  'SVM' : SVM(train=[], type=CLASSIFICATION, kernel=LINEAR),
+  #uncomment based on what classification algorithm you would like to test
+  
+  # 'NB' :  NB(train=data[:training_size], baseline=MAJORITY, method=MULTINOMIAL),
+  # 'KNN2' : KNN(train=data[:training_size], baseline=MAJORITY, k=2, distance=COSINE),
+  # 'KNN3' : KNN(train=data[:training_size], baseline=MAJORITY, k=3, distance=COSINE),
+  # 'KNN4' : KNN(train=data[:training_size], baseline=MAJORITY, k=4, distance=COSINE),
+  # 'KNN5' : KNN(train=data[:training_size], baseline=MAJORITY, k=5, distance=COSINE),
+  # 'KNN6' : KNN(train=data[:training_size], baseline=MAJORITY, k=6, distance=COSINE),
+  # 'KNN7' : KNN(train=data[:training_size], baseline=MAJORITY, k=7, distance=COSINE),
+  # 'KNN8' : KNN(train=data[:training_size], baseline=MAJORITY, k=8, distance=COSINE),
+  # 'KNN9' : KNN(train=data[:training_size], baseline=MAJORITY, k=9, distance=COSINE),
+  # 'KNN10' : KNN(train=data[:training_size], baseline=MAJORITY, k=10, distance=COSINE),
+  # 'SLP1' : SLP(train=data[:training_size], baseline=MAJORITY, iterations=1),
+  # 'SLP2' : SLP(train=data[:training_size], baseline=MAJORITY, iterations=2),
+  # 'SLP3' : SLP(train=data[:training_size], baseline=MAJORITY, iterations=3),
+  # 'SVM' : SVM(train=data[:training_size], type=CLASSIFICATION, kernel=LINEAR),
 }
 
 print 'Testing Started!'
-#you can shuffle the data
+
+# uncomment to start the normal test
 # for classification in classification_methods.keys():
 #   #measure the time it takes to classify!
 #   start = timeit.default_timer()
@@ -132,51 +143,51 @@ print 'Testing Started!'
 #   print
   
 
-#test using cross-validation
-start = timeit.default_timer()
-accuracy, precision, recall, f1, stdev = kfoldcv(NB, data, folds=10, method=MULTINOMIAL)
-stop = timeit.default_timer()
-print '*NB*'
-print 'Accuracy: ' + str(accuracy)
-print 'Precision: ' + str(precision)
-print 'Recall: ' + str(recall)
-print 'F1-score: ' + str(f1)
-print 'STDev: ' + str(stdev)
-print 'Time: ' + str(stop - start)
-print
+#uncomment to test using cross-validation
+# start = timeit.default_timer()
+# accuracy, precision, recall, f1, stdev = kfoldcv(NB, data, folds=10, method=MULTINOMIAL)
+# stop = timeit.default_timer()
+# print '*NB*'
+# print 'Accuracy: ' + str(accuracy)
+# print 'Precision: ' + str(precision)
+# print 'Recall: ' + str(recall)
+# print 'F1-score: ' + str(f1)
+# print 'STDev: ' + str(stdev)
+# print 'Time: ' + str(stop - start)
+# print
 
-start = timeit.default_timer()
-accuracy, precision, recall, f1, stdev = kfoldcv(SLP, data, folds=10, iterations=1)
-stop = timeit.default_timer()
-print '*SLP1*'
-print 'Accuracy: ' + str(accuracy)
-print 'Precision: ' + str(precision)
-print 'Recall: ' + str(recall)
-print 'F1-score: ' + str(f1)
-print 'STDev: ' + str(stdev)
-print 'Time: ' + str(stop - start)
-print
+# start = timeit.default_timer()
+# accuracy, precision, recall, f1, stdev = kfoldcv(SLP, data, folds=10, iterations=1)
+# stop = timeit.default_timer()
+# print '*SLP1*'
+# print 'Accuracy: ' + str(accuracy)
+# print 'Precision: ' + str(precision)
+# print 'Recall: ' + str(recall)
+# print 'F1-score: ' + str(f1)
+# print 'STDev: ' + str(stdev)
+# print 'Time: ' + str(stop - start)
+# print
 
-start = timeit.default_timer()
-accuracy, precision, recall, f1, stdev = kfoldcv(SLP, data, folds=10, iterations=2)
-stop = timeit.default_timer()
-print '*SLP2*'
-print 'Accuracy: ' + str(accuracy)
-print 'Precision: ' + str(precision)
-print 'Recall: ' + str(recall)
-print 'F1-score: ' + str(f1)
-print 'STDev: ' + str(stdev)
-print 'Time: ' + str(stop - start)
-print
+# start = timeit.default_timer()
+# accuracy, precision, recall, f1, stdev = kfoldcv(SLP, data, folds=10, iterations=2)
+# stop = timeit.default_timer()
+# print '*SLP2*'
+# print 'Accuracy: ' + str(accuracy)
+# print 'Precision: ' + str(precision)
+# print 'Recall: ' + str(recall)
+# print 'F1-score: ' + str(f1)
+# print 'STDev: ' + str(stdev)
+# print 'Time: ' + str(stop - start)
+# print
 
-start = timeit.default_timer()
-accuracy, precision, recall, f1, stdev = kfoldcv(SLP, data, folds=10, iterations=3)
-stop = timeit.default_timer()
-print '*SLP3*'
-print 'Accuracy: ' + str(accuracy)
-print 'Precision: ' + str(precision)
-print 'Recall: ' + str(recall)
-print 'F1-score: ' + str(f1)
-print 'STDev: ' + str(stdev)
-print 'Time: ' + str(stop - start)
-print
+# start = timeit.default_timer()
+# accuracy, precision, recall, f1, stdev = kfoldcv(SLP, data, folds=10, iterations=3)
+# stop = timeit.default_timer()
+# print '*SLP3*'
+# print 'Accuracy: ' + str(accuracy)
+# print 'Precision: ' + str(precision)
+# print 'Recall: ' + str(recall)
+# print 'F1-score: ' + str(f1)
+# print 'STDev: ' + str(stdev)
+# print 'Time: ' + str(stop - start)
+# print
