@@ -8,7 +8,7 @@ from data_helpers import *
 #rating -> NB
 
 #amount of data will be used for training
-total_data = 500000 #the maximum amount of reviews to get
+total_data = 50000 #the maximum amount of reviews to get
 #the data contains three classes, with reviews
 classification_data = {
   'musics' : { #Music reviews (6,396,350 reviews)
@@ -75,12 +75,12 @@ data.extend(asDocumentReview(classification_data['games']['reviews']))
 shuffle(data)
 
 #train for category
-nb = NB(train=data[:training_size], baseline=MAJORITY, method=MULTINOMIAL)
+nb = NB(train=data[:training_size], baseline=MAJORITY, method=MULTINOMIAL, alpha=0.0001)
 nb.finalize()
 #save
 nb.save(f, True)
 new_nb = NB.load(f)
 #test classifying
 print new_nb.classify(Document('I would watch this movie again'))
-print new_nb.classify(Document('I would not to it'))
+print new_nb.classify(Document('very bad'))
 print new_nb.classify(Document('play'))
