@@ -1,6 +1,6 @@
 import gzip
 import simplejson
-
+from pattern.vector import Document
 
 def parse(filename):
   '''
