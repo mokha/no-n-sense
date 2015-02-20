@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.core.urlresolvers import reverse
+from urllib import unquote
 
 from .models import Classifications
 
@@ -16,30 +17,22 @@ def statistics(request):
     return render(request, 'statistics.html', {})
 
 def classify(request):
-	import urllib
-
 	if request.GET.get('q'):
 		text = request.GET['q']
-		text = urllib.unquote(text)
+		text = unquote(text)
 		c = Classifications()
 		c.classify(text)
-		message = 'You submitted: %r, %r' % (c.predicted_category, c.predicted_rate)
-		return HttpResponse(message)
+		return render(request, 'classify.html', {'text': text, 'rate': c.predicted_rate, 'category': c.predicted_category})
 	else:
 		return HttpResponseRedirect(reverse('index'))
 	
 
-
-def db(request):
-	pass
-    # greeting = Greeting()
-    # greeting.save()
-
-    # greetings = Greeting.objects.all()
-
-    # return render(request, 'db.html', {'greetings': greetings})
-	
-
-
 def api(request):
-	return HttpResponse('Coming Soon!')
+	if request.GET.get('q'):
+		text = request.GET['q']
+		text = unquote(text)
+		c = Classifications()
+		c.classify(text)
+		return JsonResponse({'Classifications':{'text': text, 'rate': c.predicted_rate, 'category': c.predicted_category}})
+	else:
+		return JsonResponse({'error':''})
