@@ -1,0 +1,39 @@
+{% extends "template.html" %}
+{% load staticfiles %}
+
+{% block title %}Statistics{% endblock %}
+
+{% block content %}
+	<div id="chart"></div>
+{% endblock %}
+
+{% block css %}
+	{{ block.super }}
+	<link href="{% static 'css/c3.min.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block js %}
+	{{ block.super }}
+	<script src="{% static 'js/d3.v3.min.js' %}"></script>
+	<script src="{% static 'js/c3.min.js' %}"></script>
+
+	<script>
+      var chart = c3.generate({
+        data: {
+          columns: [
+            ['data1', 30, 200, 100, 400, 150, 250],
+            ['data2', 50, 20, 10, 40, 15, 25]
+          ],
+          axes: {
+            data1: 'y',
+            data2: 'y2'
+          }
+        },
+        axis: {
+          y2: {
+            show: true
+          }
+        }
+      });
+    </script>
+{% endblock %}
