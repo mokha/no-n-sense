@@ -5,16 +5,7 @@ from urllib import unquote
 from .models import StatisticsForm
 
 from .classifications import Classifications
-import amazonproduct, os
-
-
-aws_api = amazonproduct.API(cfg={
-    'access_key': os.getenv('AWS_ACCESS_KEY_ID'),
-    'secret_key': os.getenv('AWS_SECRET_ACCESS_KEY'),
-    'associate_tag': os.getenv('AWS_ASSOCIATE_TAG'),
-    'locale': os.getenv('AWS_LOCALE')
-})
-
+from .amazon import Amazon
 
 
 # Create your views here.
@@ -22,12 +13,18 @@ def index(request):
     return render(request, 'index.html', {})
 
 
-def amazon(request): 
-	items = aws_api.item_search('Books', Publisher="O'Reilly")
+def amazon(request):
+	if request.GET.get('keywords'):
+		keywords = request.GET['keywords']
+		keywords = unquote(text)
+		
 
-	for book in items:
-		print '%s: "%s"' % (book.ItemAttributes.Author, book.ItemAttributes.Title)
-	return render(request, 'amazon_results.html', {})
+		data = {'form': form }
+		data.update(c.classify(text))
+		return render(request, 'amazon_results.html', {})
+	else:
+		return render(request, 'classify.html') 
+	
 
 def statistics(request):    
     return render(request, 'statistics.html', {})
