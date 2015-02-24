@@ -8,6 +8,7 @@
   <title>no[n]sense - {% block title %}Template{% endblock %}</title>
   {% block css %}
   <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
   <link href="{% static 'css/style.css' %}" rel="stylesheet">
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -20,12 +21,12 @@
   </head>
   <body id="{% block body-class %}main{% endblock %}">
 
-    <nav id="header" class="navbar navbar-inverse navbar-fixed-top">
+    <nav id="header" class="navbar-inverse">
       <div class="container">
         <div class="row">
           <div class="neon col-md-6 flt-none center-block">
             <div class="navbar-brand">
-              <p><a href="#">nonsense</a></p>
+              <p><a href="{% url 'index' %}">nonsense</a></p>
             </div>
           </div>
         </div>
@@ -39,7 +40,13 @@
 
     <footer class="footer">
       <div class="container">
-        <p class="text-muted">Github Linke, License, </p>
+        <ul class="list-inline">
+            <li class="pull-right">Developed by: Khalid Alnajjar & Vladimir Goryachev | MIT License</li>
+            <li><a alt="nonsense" href="{% url 'index' %}">no[n]sense</a></li>
+            <li><a alt="classify reviews" href="{% url 'classify' %}">Classify Reviews</a></li>
+            <li><a alt="classification statistics" href="{% url 'statistics' %}">Statistics</a></li>
+            <li><a alt="classification api" href="{% url 'api' %}?review=nice movie">API</a></li>
+        </ul>
       </div>
     </footer>
     {% block js %}

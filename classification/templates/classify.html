@@ -3,11 +3,30 @@
 {% block title %}Classifying {{ text }} {% endblock %}
 
 {% block content %}
-<div class="jumbotron">
-	<h1>Classifying: </h1>
-	<p class="lead">{{ text }}</p>
-	<p>Category: {{ category }}</p>
-	<p>Rate: {{ rate }}</p>
-</div>
+<div class="row">
+	<!-- classify normal review text --> 
+	<div class="col-lg-6">
+	  <h2>Classify Text</h2>
+	  <form method="get" action="{% url 'classify' %}" id="review-form">
+	  <div class="form-group">
+	    <label for="review">Review Text: </label>
+	    <textarea name="review" class="form-control review-text" id="reviewText" placeholder="This is a great movie! I would definitely watch it again."></textarea>
+	  </div>
+	  <button type="submit" class="btn btn-primary btn-lg">Classify</button>
+	</form>
+	</div>
 
+	
+	<!-- classify amazon reviews --> 
+	<div class="col-lg-6">
+	  <h2>Search for Amazon Products</h2>	  
+	  <form method="get" action="" id="review-form">
+	  <div class="form-group">
+	    <label for="amznKeywords">Keywords: </label>
+	    <input type="text" class="form-control" id="amznKeywords" placeholder="Enter keywords">
+	  </div>
+	  <button type="submit" class="btn btn-primary btn-lg">Search</button>
+	</form>
+	</div>
+</div>
 {% endblock %}

@@ -1,47 +1,30 @@
 from django.db import models
-from pattern.vector import NB, SLP, Document
-import os, sys;
+from django.forms import ModelForm
+from django import forms
 
-class Classifications(models.Model):
-
-	#static variables
-	_slp_path = os.path.join(os.path.dirname(__file__), "classifiers/category.slp")
-	_nb_path = os.path.join(os.path.dirname(__file__), "classifiers/rating.nb")
-	_nb = NB.load(_nb_path)
-	_slp = SLP.load(_slp_path)
-
-
-
-	text = models.CharField(max_length=65535)
-	predicted_category = models.CharField(max_length=5)
-	predicted_rate = models.IntegerField()
-	is_positive = models.BooleanField()
-
-	def __init__(self):
-		pass
-
-	def classify(self, text):
-		self.text = text
-		self.predicted_category = Classifications._slp.classify(Document(text))
-		self.predicted_rate = Classifications._nb.classify(Document(text))
-
-
+#how accurate is the prediction
+CHOICES = ((1, '',), (0, '',)) #choices for the feedback
+#1 means positive, 0 means negative
 
 class Statistics(models.Model):
-
-	#predicted
-
-	#category
-	#rate
-	#positivity
-
-	is_category_accurate = models.BooleanField()
-	is_rate_accurate = models.BooleanField()
-	is_positivity_accurate = models.NullBooleanField()
-
+	text = models.CharField(max_length=65535, unique=True, default='')
+	category = models.BooleanField(choices=CHOICES, default=True)
+	rate = models.BooleanField(choices=CHOICES, default=True)
+	rate_nlp = models.BooleanField(choices=CHOICES, default=True)
+	positivity = models.BooleanField(choices=CHOICES, default=True)
 
 	#by (user|amazon_reviews)
-	by_user = models.BooleanField()
+	by_user = models.BooleanField(default=True)
+	
 
-	pass
+class StatisticsForm(ModelForm):
+	category = forms.ChoiceField(widget=forms.RadioSelect(attrs={'required': 'true'}), choices=CHOICES)
+	rate = forms.ChoiceField(widget=forms.RadioSelect(attrs={'required': 'true'}), choices=CHOICES)
+	rate_nlp = forms.ChoiceField(widget=forms.RadioSelect(attrs={'required': 'true'}), choices=CHOICES)
+	positivity = forms.ChoiceField(widget=forms.RadioSelect(attrs={'required': 'true'}), choices=CHOICES)
+	text = forms.CharField(max_length=65535, widget=forms.HiddenInput())
 
+	class Meta:
+		model = Statistics
+		#widgets = {'text': forms.HiddenInput()}
+		fields = ['text', 'category', 'rate', 'rate_nlp', 'positivity']

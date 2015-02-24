@@ -5,7 +5,7 @@ html {
 
 body {
   /* Margin bottom by footer height */
-  margin-bottom: 60px;
+  margin-bottom: 150px;
 }
 
 
@@ -15,7 +15,7 @@ body {
 }
 
 #content{
-  margin-top: 80px;
+  /*margin-top: 80px;*/
 }
 
 body > .container {
@@ -29,6 +29,8 @@ body > .container {
 .navbar-header{
 
 }
+
+.top-buffer { margin-top:35px; }
 
 #index .jumbotron {
   text-align: center;
@@ -497,8 +499,8 @@ color:#ffffff;
 
 
 /* footer */
-
 .footer {
+  margin-top: 50px;
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -508,10 +510,18 @@ color:#ffffff;
 }
 
 .footer > .container {
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: 30px;
+  padding-left: 30px;
+  padding-top: 22px;
 }
 
 .footer .container .text-muted {
   margin: 20px 0;
 }
+
+
+
+/* reviews forms */
+#review-form  textarea { height: 100px;}
+.fa-thumbs-up { color: green;}
+.fa-thumbs-down { color: red;}

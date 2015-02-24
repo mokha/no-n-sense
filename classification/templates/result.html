@@ -1,0 +1,62 @@
+{% extends "template.html" %}
+{% block body-class %}index{% endblock %}
+{% block title %}Classifying {{ text }} {% endblock %}
+
+{% block content %}
+<div class="row">
+	<form method="get" action="{% url 'classify' %}" id="review-form">
+		<div class="input-group input-group-lg">
+			<input type="text" name="review" class="form-control" placeholder="This is a great movie! I would definitely watch it again." value="{{ text }}">
+			<span class="input-group-btn">
+				<button class="btn btn-primary" type="submit">Classify!</button>
+			</span>
+		</div><!-- /input-group -->
+	</form>
+</div>
+<div class="row top-buffer">
+	<div class="col-md-10 center-block flt-none">
+		<p class="lead"><strong>Classifying: </strong> {{ text }}</p>
+		<form method="POST" action="{% url 'feedback-review' %}" id="feedback-form">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th><strong>Classification</strong></th>
+						<th>Predicted Result</th>
+						<th>Sense?</th>
+						<th>Nonsense?</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><strong>Category</strong></td>
+						<td>{{ category }}</td>
+						<td>{{ form.category.0 }} <i class="fa fa-thumbs-up fa-2x"></i></td>
+						<td>{{ form.category.1 }} <i class="fa fa-thumbs-down fa-2x"></i></td>
+					</tr>
+					<tr>
+						<td><strong>Rating</strong></td>
+						<td>{{ rate }}</td>
+						<td>{{ form.rate.0 }} <i class="fa fa-thumbs-up fa-2x"></i></td>
+						<td>{{ form.rate.1 }} <i class="fa fa-thumbs-down fa-2x"></i></td>
+					</tr>
+					<tr>
+						<td><strong>Rating (NLP)</strong></td>
+						<td>{{ rating_nlp }}</td>
+						<td>{{ form.rate_nlp.0 }} <i class="fa fa-thumbs-up fa-2x"></i></td>
+						<td>{{ form.rate_nlp.1 }} <i class="fa fa-thumbs-down fa-2x"></i></td>
+					</tr>
+					<tr>
+						<td><strong>Positivity</strong></td>
+						<td>{{ positivity }}</td>
+						<td>{{ form.positivity.0 }} <i class="fa fa-thumbs-up fa-2x"></i></td>
+						<td>{{ form.positivity.1 }} <i class="fa fa-thumbs-down fa-2x"></i></td>
+					</tr>
+				</tbody>
+			</table>
+			{{ form.text }}
+			{% csrf_token %}
+			<button type="submit" class="btn btn-primary btn-lg center-block">Submit Feedback</button>
+		</form>
+	</div>
+</div>
+{% endblock %}
