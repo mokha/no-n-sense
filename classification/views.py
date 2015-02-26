@@ -1,8 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from urllib import unquote
 from .models import StatisticsForm
+import json
 
 from .classifications import Classifications
 from .amazon import Amazon
@@ -61,10 +62,13 @@ def classify(request):
 		return render(request, 'classify.html')
 
 def api(request):
+	response = {}
 	if request.GET.get('review'):
 		text = request.GET['review']
 		text = unquote(text)
 		c = Classifications()
-		return JsonResponse({'result': c.classify(text) })
+		response['result'] = c.classify(text)
 	else:
-		return JsonResponse({'error':'Kindly use the GET parameter "review" to pass the review text to the classifier. eg: /api?review=nice movie'})
+		response['error'] = 'Kindly use the GET parameter "review" to pass the review text to the classifier. eg: /api?review=nice movie'
+
+	return HttpResponse(json.dumps(response), content_type="application/json")
