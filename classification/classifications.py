@@ -14,4 +14,4 @@ class Classifications():
 		predicted_category = Classifications._slp.classify(Document(text), discrete=True)
 		predicted_rate = Classifications._nb.classify(Document(text), discrete=True)
 
-		return {'text': text, 'rate': predicted_rate, 'category': predicted_category}
+		return {'text': text, 'rate': predicted_rate, 'category': predicted_category, 'rate_nlp': 'SOON', 'positivity': 'SOON'}

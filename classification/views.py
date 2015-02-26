@@ -28,7 +28,8 @@ def amazon(request):
 	
 
 def statistics(request):    
-    return render(request, 'statistics.html', {})
+	return HttpResponse('Soon!')
+	return render(request, 'statistics.html', {})
 
 def feedback_review(request):
 	if request.method == 'POST':
