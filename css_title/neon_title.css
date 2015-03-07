@@ -1,0 +1,205 @@
+@-webkit-keyframes on_off {
+    0% {
+        color: #BABABA;
+        text-shadow: none;
+    }
+    50%, 75% {
+        color: #000000;
+        text-shadow: 0 0 10px #2C2C2A, 0 0 20px #0D0D0C, 0 0 30px #0D0D0C;
+    }
+}
+
+@-moz-keyframes on_off {
+    0% {
+        color: #BABABA;
+        text-shadow: none;
+    }
+    50%, 75% {
+        color: #000000;
+        text-shadow: 0 0 10px #2C2C2A, 0 0 20px #0D0D0C, 0 0 30px #0D0D0C;
+    }
+}
+
+@-ms-keyframes on_off {
+    0% {
+        color: #BABABA;
+        text-shadow: none;
+    }
+    50%, 75% {
+        color: #000000;
+        text-shadow: 0 0 10px #2C2C2A, 0 0 20px #0D0D0C, 0 0 30px #0D0D0C;
+    }
+}
+
+@-webkit-keyframes neonglow {
+    13%, 23%, 25%, 37%, 47%, 52%, 68%, 70%, 81%, 96% {
+        //color: #252524;
+        color: #000000;  
+        text-shadow: 0 0 10px #41413F, 0 0 20px #252524, 0 0 30px #252524;
+    }
+    0%, 18%, 24%, 31%, 42%, 49%, 60%, 69%, 76%, 89%, 100% {
+        color: #000000;
+        text-shadow: 0 0 10px #2C2C2A, 0 0 20px #0D0D0C, 0 0 30px #0D0D0C;
+    }
+}
+
+@-moz-keyframes neonglow {
+    13%, 23%, 25%, 37%, 47%, 52%, 68%, 70%, 81%, 96% {
+        //color: #252524;
+        color: #000000;  
+        text-shadow: 0 0 10px #41413F, 0 0 20px #252524, 0 0 30px #252524;
+    }
+    0%, 18%, 24%, 31%, 42%, 49%, 60%, 69%, 76%, 89%, 100% {
+        color: #000000;
+        text-shadow: 0 0 10px #2C2C2A, 0 0 20px #0D0D0C, 0 0 30px #0D0D0C;
+    }
+}
+
+@-ms-keyframes neonglow {
+    13%, 23%, 25%, 37%, 47%, 52%, 68%, 70%, 81%, 96% {
+        //color: #252524;
+        color: #000000;  
+        text-shadow: 0 0 10px #41413F, 0 0 20px #252524, 0 0 30px #252524;
+    }
+    0%, 18%, 24%, 31%, 42%, 49%, 60%, 69%, 76%, 89%, 100% {
+        color: #000000;
+        text-shadow: 0 0 10px #2C2C2A, 0 0 20px #0D0D0C, 0 0 30px #0D0D0C;
+    }
+}
+
+@-webkit-keyframes out {
+    0%, 27%, 34%, 36% {
+        color: #BABABA;
+        text-shadow: none;
+    }
+    25%, 26%, 28%, 33%, 35% {
+        color: #000000;
+        text-shadow: 0 0 10px #2C2C2A, 0 0 20px #0D0D0C, 0 0 30px #0D0D0C;
+    }
+}
+
+@-moz-keyframes out {
+    0%, 27%, 34%, 36% {
+        color: #BABABA;
+        text-shadow: none;
+    }
+    25%, 26%, 28%, 33%, 35% {
+        color: #000000;
+        text-shadow: 0 0 10px #2C2C2A, 0 0 20px #0D0D0C, 0 0 30px #0D0D0C;
+    }
+}
+
+@-ms-keyframes out {
+    0%, 27%, 34%, 36% {
+        color: #BABABA;
+        text-shadow: none;
+    }
+    25%, 26%, 28%, 33%, 35% {
+        color: #000000;
+        text-shadow: 0 0 10px #2C2C2A, 0 0 20px #0D0D0C, 0 0 30px #0D0D0C;
+    }
+}
+
+.out {
+    -webkit-animation: out 10s infinite;
+    -moz-animation: out 10s infinite;
+    -ms-animation: out 10s infinite;
+    color: #BABABA;
+}
+
+.on_off {
+    -webkit-animation: on_off 5s infinite;
+    -moz-animation: on_off 5s infinite;
+    -ms-animation: on_off 5s infinite;
+    color: #BABABA;
+}
+
+.neonglow {
+    -webkit-animation: neonglow 3s infinite;
+    -moz-animation: neonglow 3s infinite;
+    -ms-animation: neonglow 3s infinite;
+    color: #000000;
+}
+
+@font-face {
+    font-family: disco;
+    src: url(fonts/Disco3.ttf);    
+}
+
+@font-face {    
+    font-family: hello_denver;
+    src: url('fonts/hellodenverdisplayregular_v1.6.ttf');
+}
+
+@font-face {    
+    font-family: marquee_moon;
+    src: url('fonts/marquee moon.ttf');
+}
+
+@font-face {    
+    font-family: mexcellent;
+    src: url('fonts/mexcellent rg.ttf');
+}
+
+@font-face {    
+    font-family: monoton;
+    src: url('fonts/Monoton-Regular.ttf');
+}
+
+@font-face {    
+    font-family: neon_pixel;
+    src: url('fonts/neon_pixel-7.ttf');
+}
+
+@font-face {    
+    font-family: plasma;
+    src: url('fonts/Plasma13.ttf');
+}
+
+#fnt_disco {
+    font-family: disco;
+    font-weight: normal;
+    font-size: 550%
+}
+
+#fnt_drive {
+    font-family: drive_th;
+    font-weight: normal;
+    font-size: 550%
+}
+
+#fnt_hello_denver {
+    font-family: hello_denver;
+    font-weight: normal;
+    font-size: 550%
+}
+
+#fnt_marquee {
+    font-family: marquee_moon;
+    font-weight: normal;
+    font-size: 550%
+}
+
+#fnt_mexcellent {
+    font-family: mexcellent;
+    font-weight: normal;
+    font-size: 550%
+}
+
+#fnt_monoton {
+    font-family: monoton;
+    font-weight: normal;
+    font-size: 550%
+}
+
+#fnt_neon_pixel {
+    font-family: neon_pixel;
+    font-weight: normal;
+    font-size: 550%
+}
+
+#fnt_plasma {
+    font-family: plasma;
+    font-weight: normal;
+    font-size: 550%
+}
