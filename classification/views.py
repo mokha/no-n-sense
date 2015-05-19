@@ -17,11 +17,16 @@ def index(request):
 def amazon(request):
 	if request.GET.get('keywords'):
 		keywords = request.GET['keywords']
-		keywords = unquote(text)
+		keywords = unquote(keywords)
+
+
+		products = Amazon.search(keywords)
+
+		return HttpResponse(str(len(products)))
 		
 
-		data = {'form': form }
-		data.update(c.classify(text))
+		#data = {'form': form }
+		#data.update(c.classify(text))
 		return render(request, 'amazon_results.html', {})
 	else:
 		return render(request, 'classify.html') 

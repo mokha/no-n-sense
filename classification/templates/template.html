@@ -21,12 +21,16 @@
   </head>
   <body id="{% block body-class %}main{% endblock %}">
 
-    <nav id="header" class="navbar-inverse">
+    <nav id="header">
       <div class="container">
         <div class="row">
           <div class="neon col-md-6 flt-none center-block">
             <div class="navbar-brand">
-              <p><a href="{% url 'index' %}">nonsense</a></p>
+                <h1 id="fnt_hello_denver">
+                  <a href="{% url 'index' %}">
+                  <span class="on_off">NO</span><span class="neonglow">[</span><span class="out">N</span><span class="neonglow">]SENSE</span>
+                  </a>
+                </h1>
             </div>
           </div>
         </div>
@@ -44,7 +48,6 @@
             <li class="pull-right">Developed by: Khalid Alnajjar & Vladimir Goryachev | MIT License</li>
             <li><a alt="nonsense" href="{% url 'index' %}">no[n]sense</a></li>
             <li><a alt="classify reviews" href="{% url 'classify' %}">Classify Reviews</a></li>
-            <li><a alt="classification statistics" href="{% url 'statistics' %}">Statistics</a></li>
             <li><a alt="classification api" href="{% url 'api' %}?review=nice movie">API</a></li>
         </ul>
       </div>
