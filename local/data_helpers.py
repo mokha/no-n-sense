@@ -2,6 +2,20 @@ import gzip
 import simplejson
 from pattern.vector import Document, count
 from pattern.en import parsetree
+import cPickle as pickle
+
+def load_pickle(filename):
+    f = open(filename,"rb")
+    p = pickle.load(f)
+    f.close()
+    return(p)
+
+def save_pickle(filename, data):
+    f = open(filename,"wb")
+    pickle.dump(data, f, protocol=2)    
+    f.close()
+
+
 
 def parse(filename):
     '''

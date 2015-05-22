@@ -2,7 +2,7 @@ import timeit
 from pattern.vector import MAJORITY, MULTINOMIAL, COSINE, CLASSIFICATION, POLYNOMIAL
 from pattern.vector import NB, KNN, SLP, SVM, kfoldcv
 
-def test(data, type):
+def normal_test(data, type):
     print '----------------------------------------------------'
     print 'TEST FUNCTION STARTED FOR ' + type + '!'
     total_data_size = len(data)
@@ -48,53 +48,105 @@ def test(data, type):
       print
 
 
-    # #uncomment to test using cross-validation
-    # start = timeit.default_timer()
-    # accuracy, precision, recall, f1, stdev = kfoldcv(NB, data, folds=10, method=MULTINOMIAL)
-    # stop = timeit.default_timer()
-    # print '*NB*'
-    # print 'Accuracy: ' + str(accuracy)
-    # print 'Precision: ' + str(precision)
-    # print 'Recall: ' + str(recall)
-    # print 'F1-score: ' + str(f1)
-    # print 'STDev: ' + str(stdev)
-    # print 'Time: ' + str(stop - start)
-    # print
-    #
-    # start = timeit.default_timer()
-    # accuracy, precision, recall, f1, stdev = kfoldcv(SLP, data, folds=10, iterations=1)
-    # stop = timeit.default_timer()
-    # print '*SLP1*'
-    # print 'Accuracy: ' + str(accuracy)
-    # print 'Precision: ' + str(precision)
-    # print 'Recall: ' + str(recall)
-    # print 'F1-score: ' + str(f1)
-    # print 'STDev: ' + str(stdev)
-    # print 'Time: ' + str(stop - start)
-    # print
-    #
-    # start = timeit.default_timer()
-    # accuracy, precision, recall, f1, stdev = kfoldcv(SLP, data, folds=10, iterations=2)
-    # stop = timeit.default_timer()
-    # print '*SLP2*'
-    # print 'Accuracy: ' + str(accuracy)
-    # print 'Precision: ' + str(precision)
-    # print 'Recall: ' + str(recall)
-    # print 'F1-score: ' + str(f1)
-    # print 'STDev: ' + str(stdev)
-    # print 'Time: ' + str(stop - start)
-    # print
-    #
-    # start = timeit.default_timer()
-    # accuracy, precision, recall, f1, stdev = kfoldcv(SLP, data, folds=10, iterations=3)
-    # stop = timeit.default_timer()
-    # print '*SLP3*'
-    # print 'Accuracy: ' + str(accuracy)
-    # print 'Precision: ' + str(precision)
-    # print 'Recall: ' + str(recall)
-    # print 'F1-score: ' + str(f1)
-    # print 'STDev: ' + str(stdev)
-    # print 'Time: ' + str(stop - start)
-    # print
+def kfold_knn(data, kk=9):
+    start = timeit.default_timer()
+    accuracy, precision, recall, f1, stdev = kfoldcv(KNN, data, folds=10, k=kk, distance=COSINE)
+    stop = timeit.default_timer()
+    print '*KNN9*'
+    print 'Accuracy: ' + str(accuracy)
+    print 'Precision: ' + str(precision)
+    print 'Recall: ' + str(recall)
+    print 'F1-score: ' + str(f1)
+    print 'STDev: ' + str(stdev)
+    print 'Time: ' + str(stop - start)
+    print
 
+def kfold_slp(data, itr=3):
+    start = timeit.default_timer()
+    accuracy, precision, recall, f1, stdev = kfoldcv(SLP, data, folds=10, iterations=itr)
+    stop = timeit.default_timer()
+    print '*SLP3*'
+    print 'Accuracy: ' + str(accuracy)
+    print 'Precision: ' + str(precision)
+    print 'Recall: ' + str(recall)
+    print 'F1-score: ' + str(f1)
+    print 'STDev: ' + str(stdev)
+    print 'Time: ' + str(stop - start)
+    print
+
+def kfold_nb(data):
+    start = timeit.default_timer()
+    accuracy, precision, recall, f1, stdev = kfoldcv(NB, data, folds=10, method=MULTINOMIAL)
+    stop = timeit.default_timer()
+    print '*NB*'
+    print 'Accuracy: ' + str(accuracy)
+    print 'Precision: ' + str(precision)
+    print 'Recall: ' + str(recall)
+    print 'F1-score: ' + str(f1)
+    print 'STDev: ' + str(stdev)
+    print 'Time: ' + str(stop - start)
+    print
+
+def kfold_svm(data):
+    start = timeit.default_timer()
+    accuracy, precision, recall, f1, stdev = kfoldcv(SVM, data, folds=10, type=CLASSIFICATION, kernel=POLYNOMIAL)
+    stop = timeit.default_timer()
+    print '*SVM*'
+    print 'Accuracy: ' + str(accuracy)
+    print 'Precision: ' + str(precision)
+    print 'Recall: ' + str(recall)
+    print 'F1-score: ' + str(f1)
+    print 'STDev: ' + str(stdev)
+    print 'Time: ' + str(stop - start)
+    print
+
+
+def kfold_categories(data):
+    print '----------------------------------------------------'
+    print 'Kfoldcs test for categories'
+    # SLP3
+    # KNN9
+    # NB
+    kfold_slp(data, 3)
+    kfold_knn(data, 9)
+    kfold_nb(data)
+
+    print '----------------------------------------------------'
+
+
+def kfold_rating(data):
+    print '----------------------------------------------------'
+    print 'Kfoldcs test for rating'
+    # NB
+    # SLP3
+    # KNN10
+    kfold_nb(data)
+    kfold_slp(data, 3)
+    kfold_knn(data, 10)
+
+    print '----------------------------------------------------'
+
+def kfold_ratingNLP(data):
+    print '----------------------------------------------------'
+    print 'Kfoldcs test for ratingNLP'
+    # SVM
+    # KNN10
+    # NB
+    kfold_svm(data)
+    kfold_knn(data, 10)
+    kfold_nb(data)
+
+    print '----------------------------------------------------'
+
+
+def kfold_sentiment(data):
+    print '----------------------------------------------------'
+    print 'Kfoldcs test for sentiment'
+    # KNN10
+    # SLP3
+    # NB
+    kfold_knn(data, 10)
+    kfold_slp(data, 3)
+    kfold_nb(data)
+    
     print '----------------------------------------------------'
