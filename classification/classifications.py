@@ -7,12 +7,12 @@ class Classifications():
 	#static variables
     _category_path = os.path.join(os.path.dirname(__file__), "classifiers/category.slp")
     _rating_path = os.path.join(os.path.dirname(__file__), "classifiers/rating.slp")
-    _rating_nlp_path = os.path.join(os.path.dirname(__file__), "classifiers/rating_nlp.slp")
+    _rating_nlp_path = os.path.join(os.path.dirname(__file__), "classifiers/rating_nlp.svm")
     _sentiment_path = os.path.join(os.path.dirname(__file__), "classifiers/sentiment.nb")
 
     _category = SLP.load(_category_path)
     _rating = SLP.load(_rating_path)
-    _rating_nlp = SLP.load(_rating_nlp_path)
+    _rating_nlp = SVM.load(_rating_nlp_path)
     _sentiment = NB.load(_sentiment_path)
 
     @staticmethod
